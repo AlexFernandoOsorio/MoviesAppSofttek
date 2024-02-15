@@ -3,3 +3,17 @@ D
 app/build.gradle.kts,d/2/d2a4383452aad84a18429a5844d31330a012a9e6
 @
 build.gradle.kts,d/b/dbcff70658daf80b53ce624f6adcaa529df5ed8d
+€
+Papp/src/main/java/com/example/moviesappsofttek/core/components/TextFieldState.kt,0/f/0fd14e34395a66d887d5a5f97c7b5d8edd4588ca
+|
+Lapp/src/main/java/com/example/moviesappsofttek/data/local/dao/DatabaseDao.kt,7/e/7e0304bdaf2de6cd114ac8d6202cbb1ae748d898
+
+Qapp/src/main/java/com/example/moviesappsofttek/data/local/entities/MovieEntity.kt,a/8/a80fbd2f947c0f1aa24e05cec824df92cf5dbf37
+x
+Happ/src/main/java/com/example/moviesappsofttek/data/local/AppDatabase.kt,f/f/ffc0f75caff2f5eb3c60fcab8cc4b252bca9d742
+n
+>app/src/main/java/com/example/moviesappsofttek/MainActivity.kt,5/c/5ce6cddcf4d2828c3bac091b4726cb9739967dde
+r
+Bapp/src/main/java/com/example/moviesappsofttek/di/UseCaseModule.kt,9/6/9653681110f68edce85a843d84185d5135b370cb
+‹
+[app/src/main/java/com/example/moviesappsofttek/ui/favoritesmovies/FavoritesMoviesAdapter.kt,d/4/d441fdfff251bdc4a9408e816967fee5f02563a3
