@@ -3,11 +3,13 @@ package com.example.moviesappsofttek.features.movies
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.moviesappsofttek.core.utils.GlobalConstants.noInternet
 import com.example.moviesappsofttek.domain.models.movies.MovieModel
 import com.example.moviesappsofttek.domain.usecase.movies.GetMoviesByNameFromApiUseCase
 import com.example.moviesappsofttek.domain.usecase.movies.GetMovieListFromApiUseCase
 import com.example.moviesappsofttek.core.utils.GlobalConstants.noSearchMovies
 import com.example.moviesappsofttek.core.utils.UIEvent
+import com.example.moviesappsofttek.domain.usecase.movies.GetFavoriteMoviesListFromDbUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MoviesViewModel @Inject constructor(
     private val getMovieListFromApiUseCase: GetMovieListFromApiUseCase,
-    private val getMoviesByNameFromApiUseCase: GetMoviesByNameFromApiUseCase
+    private val getMoviesByNameFromApiUseCase: GetMoviesByNameFromApiUseCase,
+    private val getFavoriteMoviesListFromDbUseCase: GetFavoriteMoviesListFromDbUseCase
 ) : ViewModel() {
 
     //Inicializo las variables  a utilizar en el fragment
@@ -49,9 +52,30 @@ class MoviesViewModel @Inject constructor(
                     }
 
                     is UIEvent.Error -> {
-                        _moviesListModel.postValue(emptyList())
-                        _errorMessage.postValue(it.message!!)
-                        isError.postValue(true)
+
+
+                        val localMovieDetailList = getFavoriteMoviesListFromDbUseCase()
+                        val localListMovie = localMovieDetailList.map { movieDetailModel ->
+                            MovieModel(
+                                id = movieDetailModel.id,
+                                title = movieDetailModel.title,
+                                image = movieDetailModel.image,
+                                description = movieDetailModel.description,
+                                popularity = movieDetailModel.popularity,
+                                release_date = movieDetailModel.release_date,
+                                genre_ids = movieDetailModel.genre_ids.map { it.length }
+                            )
+                        }
+                        if (localListMovie.isNotEmpty()) {
+                            _moviesListModel.postValue(localListMovie)
+                            _errorMessage.postValue("")
+                            isError.postValue(false)
+                        } else {
+                            // Si la base de datos también está vacía, indicar un error
+                            _moviesListModel.postValue(emptyList())
+                            _errorMessage.postValue(noInternet)
+                            isError.postValue(true)
+                        }
                     }
                 }
             }

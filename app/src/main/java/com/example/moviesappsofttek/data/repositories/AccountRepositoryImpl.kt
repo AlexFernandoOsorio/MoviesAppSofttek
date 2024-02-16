@@ -3,8 +3,8 @@ package com.example.moviesappsofttek.data.repositories
 import com.example.moviesappsofttek.core.utils.GlobalConstants.errorNoUser
 import com.example.moviesappsofttek.core.utils.ResourceEvent
 import com.example.moviesappsofttek.data.local.dao.DatabaseDao
-import com.example.moviesappsofttek.data.remote.mappers.toDataAccount
-import com.example.moviesappsofttek.data.remote.mappers.toDomainAccount
+import com.example.moviesappsofttek.data.mappers.toDataAccount
+import com.example.moviesappsofttek.data.mappers.toDomainAccount
 import com.example.moviesappsofttek.domain.models.login.AccountModel
 import com.example.moviesappsofttek.domain.repositories.AccountRepository
 import retrofit2.HttpException

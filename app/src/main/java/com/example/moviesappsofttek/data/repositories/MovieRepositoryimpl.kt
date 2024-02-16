@@ -2,8 +2,8 @@ package com.example.moviesappsofttek.data.repositories
 
 import com.example.moviesappsofttek.data.local.dao.DatabaseDao
 import com.example.moviesappsofttek.data.local.entities.MovieEntity
-import com.example.moviesappsofttek.data.remote.mappers.toDomainMovieDetail
-import com.example.moviesappsofttek.data.remote.mappers.toDomainMovieList
+import com.example.moviesappsofttek.data.mappers.toDomainMovieDetail
+import com.example.moviesappsofttek.data.mappers.toDomainMovieList
 import com.example.moviesappsofttek.data.remote.services.ApiServiceMovie
 import com.example.moviesappsofttek.domain.models.movies.MovieDetailModel
 import com.example.moviesappsofttek.domain.models.movies.MovieModel
