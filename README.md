@@ -3,7 +3,8 @@
 App de pelicular mediante consumo de una API Rest
 
 ## Screenshots
-![Screenshot from 2023-11-26 22-29-34](https://github.com/AlexFernandoOsorio/AuthApp/assets/18273057/2ee34c36-ac61-46a5-94b8-71c45269e697)
+![WhatsApp Image 2024-02-16 at 10 03 33 AM](https://github.com/AlexFernandoOsorio/MoviesAppSofttek/assets/18273057/89c4feb4-b5b5-4603-9ecc-0ef43c09f892)
+
 ## Features
 
 - Dagger Hilt
