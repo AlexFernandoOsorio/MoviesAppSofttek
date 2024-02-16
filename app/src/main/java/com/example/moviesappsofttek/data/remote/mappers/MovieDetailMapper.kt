@@ -4,7 +4,7 @@ import com.example.moviesappsofttek.data.remote.models.moviesDetail.MovieDetailD
 import com.example.moviesappsofttek.domain.models.movies.MovieDetailModel
 
 
-fun MovieDetailDto.toDomainMovieDetail() : MovieDetailModel {
+fun MovieDetailDto.toDomainMovieDetail(): MovieDetailModel {
     return MovieDetailModel(
         id = this.id,
         title = this.title,

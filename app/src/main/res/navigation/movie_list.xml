@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/moviesFragment2"
-        android:name="com.example.moviesappsofttek.ui.movies.MoviesFragment"
+        android:name="com.example.moviesappsofttek.features.movies.MoviesFragment"
         android:label="fragment_movies"
         tools:layout="@layout/fragment_movies" >
         <action
@@ -17,6 +17,6 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment2"
-        android:name="com.example.moviesappsofttek.ui.moviesdetail.MovieDetailFragment"
+        android:name="com.example.moviesappsofttek.features.moviesdetail.MovieDetailFragment"
         android:label="MovieDetailFragment" />
 </navigation>

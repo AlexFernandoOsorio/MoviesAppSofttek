@@ -16,9 +16,10 @@ import javax.inject.Singleton
 object RoomModule {
 
     const val DATABASE_NAME = "App_database"
+
     @Singleton
     @Provides
-    fun provideRoom(@ApplicationContext context : Context) = Room.databaseBuilder(
+    fun provideRoom(@ApplicationContext context: Context) = Room.databaseBuilder(
         context,
         AppDatabase::class.java,
         DATABASE_NAME

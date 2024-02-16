@@ -13,8 +13,7 @@ import com.example.moviesappsofttek.data.local.entities.MovieEntity
 )
 abstract class AppDatabase : RoomDatabase() {
 
-
+    //Dao para acceder a las tablas
     abstract fun databaseDao(): DatabaseDao
-
 
 }

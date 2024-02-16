@@ -19,8 +19,11 @@ object RepositoriesModule {
 
     @Provides
     @Singleton
-    fun providesMovieRepository(apiServiceMovie: ApiServiceMovie,databaseDao: DatabaseDao): MovieRepository {
-        return MovieRepositoryimpl(apiServiceMovie,databaseDao)
+    fun providesMovieRepository(
+        apiServiceMovie: ApiServiceMovie,
+        databaseDao: DatabaseDao
+    ): MovieRepository {
+        return MovieRepositoryimpl(apiServiceMovie, databaseDao)
     }
 
     @Provides

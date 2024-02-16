@@ -13,7 +13,7 @@ import javax.inject.Inject
 class MovieRepositoryimpl @Inject constructor(
     private val apiServiceMovie: ApiServiceMovie,
     private val movieDao: DatabaseDao
-)  : MovieRepository {
+) : MovieRepository {
 
 
     override suspend fun getMovieListPopularFromRemote(apiKey: String): List<MovieModel> {
@@ -28,12 +28,12 @@ class MovieRepositoryimpl @Inject constructor(
         return apiServiceMovie.getMoviesByName(apiKey, name).toDomainMovieList()
     }
 
-    override suspend fun getMovieByIdFromLocal(id : Int): MovieDetailModel {
+    override suspend fun getMovieByIdFromLocal(id: Int): MovieDetailModel {
         return movieDao.getMovieById(id).toDomainMovieList()
     }
 
     override suspend fun getMovieListFromLocal(): List<MovieDetailModel> {
-        val response : List<MovieEntity> = movieDao.getAllMovies()
+        val response: List<MovieEntity> = movieDao.getAllMovies()
 
         return response.map {
             MovieDetailModel(
@@ -48,29 +48,33 @@ class MovieRepositoryimpl @Inject constructor(
         }
     }
 
-    override suspend fun insertMovieToLocal(movie : MovieDetailModel){
-        movieDao.insertMovie(MovieEntity(
-            id = movie.id,
-            name = movie.title,
-            image = movie.image,
-            description = movie.description,
-            popularity = movie.popularity.toString(),
-            release_date = movie.release_date,
-            genre = movie.genre_ids.joinToString(","),
-            isFavorite = true
-        ))
+    override suspend fun insertMovieToLocal(movie: MovieDetailModel) {
+        movieDao.insertMovie(
+            MovieEntity(
+                id = movie.id,
+                name = movie.title,
+                image = movie.image,
+                description = movie.description,
+                popularity = movie.popularity.toString(),
+                release_date = movie.release_date,
+                genre = movie.genre_ids.joinToString(","),
+                isFavorite = true
+            )
+        )
     }
 
-    override suspend fun deleteMovieFromLocal(movie : MovieDetailModel){
-        movieDao.deleteMovie(MovieEntity(
-            id = movie.id,
-            name = movie.title,
-            image = movie.image,
-            description = movie.description,
-            popularity = movie.popularity.toString(),
-            release_date = movie.release_date,
-            genre = movie.genre_ids.joinToString(","),
-            isFavorite = true
-        ))
+    override suspend fun deleteMovieFromLocal(movie: MovieDetailModel) {
+        movieDao.deleteMovie(
+            MovieEntity(
+                id = movie.id,
+                name = movie.title,
+                image = movie.image,
+                description = movie.description,
+                popularity = movie.popularity.toString(),
+                release_date = movie.release_date,
+                genre = movie.genre_ids.joinToString(","),
+                isFavorite = true
+            )
+        )
     }
 }
