@@ -46,15 +46,16 @@ class MoviesViewModel @Inject constructor(
                     }
 
                     is UIEvent.Success -> {
+                        //Se completa la lista con las peliculas obtenidas de la API
                         _moviesListModel.postValue(it.data!!.toList())
                         _errorMessage.postValue("")
                         isError.postValue(false)
                     }
 
                     is UIEvent.Error -> {
-
-
+                        //Si hay un error en la consulta a la API, se obtienen las peliculas favoritas guardadas
                         val localMovieDetailList = getFavoriteMoviesListFromDbUseCase()
+                        //Se mapea la lista de peliculas favoritas guardadas a la lista de peliculas a mostrar
                         val localListMovie = localMovieDetailList.map { movieDetailModel ->
                             MovieModel(
                                 id = movieDetailModel.id,
@@ -66,12 +67,14 @@ class MoviesViewModel @Inject constructor(
                                 genre_ids = movieDetailModel.genre_ids.map { it.length }
                             )
                         }
+                        //Verificamos si la lista de peliculas favoritas guardadas tambien no está vacía
                         if (localListMovie.isNotEmpty()) {
+                            //completamos la lista con las peliculas favoritas guardadas
                             _moviesListModel.postValue(localListMovie)
                             _errorMessage.postValue("")
                             isError.postValue(false)
                         } else {
-                            // Si la base de datos también está vacía, indicar un error
+                            // Si la base de datos también está vacía, indicar el mensaje de error
                             _moviesListModel.postValue(emptyList())
                             _errorMessage.postValue(noInternet)
                             isError.postValue(true)
