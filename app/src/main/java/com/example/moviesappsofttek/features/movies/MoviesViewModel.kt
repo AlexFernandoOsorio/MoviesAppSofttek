@@ -37,7 +37,7 @@ class MoviesViewModel @Inject constructor(
         viewModelScope.launch() {
             _moviesListModel.postValue(emptyList())
             val movieList = getMovieListFromApiUseCase.invoke(apiKey)
-            movieList.collect {
+            movieList.collect { it ->
                 when (it) {
                     is UIEvent.Loading -> {
                         _moviesListModel.postValue(emptyList())
