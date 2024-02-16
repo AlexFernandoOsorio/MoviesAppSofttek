@@ -15,20 +15,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieDetailViewModel @Inject constructor() : ViewModel() {
-
-    @Inject
-    lateinit var GetMovieDetailFromApiUseCase: GetMovieByIdFromApiUseCase
-
-    @Inject
-    lateinit var insertFavoriteMovieToDb: InsertFavoriteMovieToDbUseCase
-
-    @Inject
-    lateinit var getFavoriteMovieByIdFromDbUseCase: GetFavoriteMovieByIdFromDbUseCase
-
-    @Inject
-    lateinit var deleteFavoriteMovieFromDb: DeleteFavoriteMovieFromDbUseCase
-
+class MovieDetailViewModel @Inject constructor(
+    private val getMovieByIdFromApiUseCase: GetMovieByIdFromApiUseCase,
+    private val insertFavoriteMovieToDb: InsertFavoriteMovieToDbUseCase,
+    private val getFavoriteMovieByIdFromDbUseCase: GetFavoriteMovieByIdFromDbUseCase,
+    private val deleteFavoriteMovieFromDb: DeleteFavoriteMovieFromDbUseCase
+) : ViewModel() {
     //Inicializamos los livedata
     private var _movieModel = MutableLiveData<MovieDetailModel?>()
     var movieModel: MutableLiveData<MovieDetailModel?> = _movieModel
@@ -41,7 +33,7 @@ class MovieDetailViewModel @Inject constructor() : ViewModel() {
     fun getMovieByIdFromApi(movieId: String, apiKey: String) {
         viewModelScope.launch(Dispatchers.IO) {
             _movieModel.postValue(null)
-            val movieList = GetMovieDetailFromApiUseCase(movieId, apiKey)
+            val movieList = getMovieByIdFromApiUseCase(movieId, apiKey)
             movieList.collect {
                 when (it) {
                     is UIEvent.Loading -> {

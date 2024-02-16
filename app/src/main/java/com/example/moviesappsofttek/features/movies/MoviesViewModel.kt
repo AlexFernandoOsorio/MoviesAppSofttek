@@ -29,7 +29,7 @@ class MoviesViewModel @Inject constructor(
     var isError: MutableLiveData<Boolean> = _isError
 
 
-    //Obtengo la lista de peliculas populares del API
+    //Obtengo la lista de peliculas populares indexado por 20 del API
     fun getMovieListPopularFromApi(apiKey: String) {
         viewModelScope.launch() {
             _moviesListModel.postValue(emptyList())

@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class GetMoviesByNameFromApiUseCase @Inject constructor(private val movieRepository: MovieRepository) {
-
     operator fun invoke(apiKey : String, name : String) = flow<UIEvent<List<MovieModel>>> {
         emit(UIEvent.Loading())
         val movieList = movieRepository.getMovieByNameFromRemote(apiKey, name)

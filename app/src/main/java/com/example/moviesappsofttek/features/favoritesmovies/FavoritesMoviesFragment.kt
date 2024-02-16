@@ -25,19 +25,13 @@ class FavoritesMoviesFragment : Fragment(), FavoritesMoviesAdapter.OnRecipeClick
     private lateinit var moviesAdapter: FavoritesMoviesAdapter
     private lateinit var movies: List<MovieDetailModel>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentFavoritesMoviesBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

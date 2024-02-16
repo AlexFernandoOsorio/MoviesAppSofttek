@@ -5,11 +5,7 @@ import com.example.moviesappsofttek.domain.repositories.MovieRepository
 import javax.inject.Inject
 
 class GetFavoriteMoviesListFromDbUseCase @Inject constructor(private val movieRepository: MovieRepository) {
-
-    suspend operator fun invoke() : List<MovieDetailModel>{
-
-        var lista : List<MovieDetailModel> = movieRepository.getMovieListFromLocal()
-
-        return lista
+    suspend operator fun invoke(): List<MovieDetailModel> {
+        return movieRepository.getMovieListFromLocal()
     }
 }
