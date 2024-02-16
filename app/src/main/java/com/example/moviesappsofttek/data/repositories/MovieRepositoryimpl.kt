@@ -16,8 +16,8 @@ class MovieRepositoryimpl @Inject constructor(
 ) : MovieRepository {
 
 
-    override suspend fun getMovieListPopularFromRemote(apiKey: String): List<MovieModel> {
-        return apiServiceMovie.getMoviesPopular(apiKey).toDomainMovieList()
+    override suspend fun getMovieListPopularFromRemote(apiKey: String, page : Int): List<MovieModel> {
+        return apiServiceMovie.getMoviesPopular(apiKey,page).toDomainMovieList()
     }
 
     override suspend fun getMovieByIdFromRemote(movieId: String, apiKey: String): MovieDetailModel {

@@ -18,7 +18,7 @@ class MoviesAdapter(
 ) :
     RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
-    interface OnRecipeClickListener {
+    fun interface OnRecipeClickListener {
         fun onRecipeClick(movies: MovieModel, position: Int)
     }
 
@@ -31,29 +31,29 @@ class MoviesAdapter(
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
         val movie = movies[position]
 
-        holder.movie_name.text = movie.title
-        holder.movie_date.text = movie.release_date
-        Glide.with(holder.movie_image)
+        holder.movieName.text = movie.title
+        holder.movieDate.text = movie.release_date
+        Glide.with(holder.movieImage)
             .load(poster_path + movie.image)
             .centerCrop()
-            .into(holder.movie_image);
+            .into(holder.movieImage);
 
 
         holder.itemView.setOnClickListener {
             itemRecipeClickListener.onRecipeClick(movie, position)
         }
 
-        holder.movie_rating.rating = movie.popularity.toFloat()
+        holder.movieRating.rating = movie.popularity.toFloat()
     }
 
     override fun getItemCount(): Int = movies.size
 
     class MoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val movie_name: TextView = itemView.findViewById(R.id.movie_name)
-        val movie_date: TextView = itemView.findViewById(R.id.movie_fecha)
-        val movie_image: ImageView = itemView.findViewById(R.id.movie_image)
-        val movie_rating: RatingBar = itemView.findViewById(R.id.movie_ratingBar)
+        val movieName: TextView = itemView.findViewById(R.id.movie_name)
+        val movieDate: TextView = itemView.findViewById(R.id.movie_fecha)
+        val movieImage: ImageView = itemView.findViewById(R.id.movie_image)
+        val movieRating: RatingBar = itemView.findViewById(R.id.movie_ratingBar)
 
     }
 

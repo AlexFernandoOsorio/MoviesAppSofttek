@@ -33,10 +33,10 @@ class MoviesViewModel @Inject constructor(
 
 
     //Obtengo la lista de peliculas populares indexado por 20 del API
-    fun getMovieListPopularFromApi(apiKey: String) {
-        viewModelScope.launch() {
+    fun getMovieListPopularFromApi(apiKey: String, page: Int) {
+        viewModelScope.launch {
             _moviesListModel.postValue(emptyList())
-            val movieList = getMovieListFromApiUseCase.invoke(apiKey)
+            val movieList = getMovieListFromApiUseCase.invoke(apiKey, page)
             movieList.collect { it ->
                 when (it) {
                     is UIEvent.Loading -> {
@@ -55,7 +55,7 @@ class MoviesViewModel @Inject constructor(
                     is UIEvent.Error -> {
                         //Si hay un error en la consulta a la API, se obtienen las peliculas favoritas guardadas
                         val localMovieDetailList = getFavoriteMoviesListFromDbUseCase()
-                        //Se mapea la lista de peliculas favoritas guardadas a la lista de peliculas a mostrar
+                        //Se mapea la lista de peliculas favoritas guardadas en base de datos a la lista de peliculas a mostrar
                         val localListMovie = localMovieDetailList.map { movieDetailModel ->
                             MovieModel(
                                 id = movieDetailModel.id,
@@ -88,7 +88,7 @@ class MoviesViewModel @Inject constructor(
 
     //Obtengo la lista de peliculas por nombre del API
     fun getMovieListByNameFromApi(apiKey: String, name: String) {
-        viewModelScope.launch() {
+        viewModelScope.launch {
             _moviesListModel.postValue(emptyList())
             val movieList = getMoviesByNameFromApiUseCase(apiKey, name)
             movieList.collect {
@@ -105,8 +105,7 @@ class MoviesViewModel @Inject constructor(
 
                     is UIEvent.Error -> {
                         _moviesListModel.postValue(emptyList())
-                        it.message = it.message
-                        _errorMessage.postValue(noSearchMovies + name)
+                        _errorMessage.postValue(noSearchMovies + name + " - error : ${it.message}")
                     }
                 }
             }

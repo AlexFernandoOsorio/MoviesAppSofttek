@@ -1,6 +1,7 @@
 package com.example.moviesappsofttek.features.loginScreen
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -108,7 +109,9 @@ fun LoginScreen(
                         )
                     }
                     navController.popBackStack()
+                    //Procedemos a cambiar de actividad , en este caso a la actividad de FragmentsActivity
                     context.startActivity(Intent(context, FragmentsActivity::class.java))
+                    (context as Activity).finish()
                 }
             }
         }

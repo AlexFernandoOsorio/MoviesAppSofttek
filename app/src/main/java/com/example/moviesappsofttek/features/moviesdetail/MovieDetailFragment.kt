@@ -59,6 +59,7 @@ class MovieDetailFragment : Fragment() {
                     generos = generos + " • " + item
                 }
                 binding.movieGenero.text = generos
+                //Dibujamos la imagen de la pelicula con la libreria Glide
                 Glide.with(binding.movieImage.context)
                     .load(poster_path + it.image)
                     .centerCrop()

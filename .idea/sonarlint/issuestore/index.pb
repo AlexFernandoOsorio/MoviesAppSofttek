@@ -137,3 +137,15 @@ Lapp/src/main/java/com/example/moviesappsofttek/data/mappers/MovieDbMapper.kt,8
 Papp/src/main/java/com/example/moviesappsofttek/data/mappers/MovieDetailMapper.kt,a/6/a61a392edcf61fb8fbb0ff65649dc59ebf4f42f7
 z
 Japp/src/main/java/com/example/moviesappsofttek/data/mappers/MovieMapper.kt,4/0/407dacda9b8a811d364d383ab50915580b77351b
+w
+Gapp/src/main/java/com/example/moviesappsofttek/core/utils/FlowResult.kt,f/0/f05e7d0bcfa5d7f209bbd589460fa3486b2a23d2
+z
+Japp/src/main/java/com/example/moviesappsofttek/core/utils/ResourceEvent.kt,f/e/feb9d34dde7e996aeff243d305e64bade1ce6e4b
+t
+Dapp/src/main/java/com/example/moviesappsofttek/core/utils/UIEvent.kt,8/f/8f2681f4786b5a52d041f5eadb55008462009b4d
+w
+Gapp/src/main/java/com/example/moviesappsofttek/core/states/LoadState.kt,7/3/73ad8625c267f7da3563235ad3f0a45a6a02f5b7
+x
+Happ/src/main/java/com/example/moviesappsofttek/core/states/MovieState.kt,0/5/058db806deeefd38e6350f14e8cab9f3a88598e4
+u
+Eapp/src/main/java/com/example/moviesappsofttek/core/states/UiState.kt,3/b/3b50f28d09cd76efa710951fa7ab035e981a7724

@@ -4,10 +4,10 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviesappsofttek.core.utils.ResourceEvent
 import com.example.moviesappsofttek.core.components.TextFieldState
 import com.example.moviesappsofttek.core.states.LoadState
 import com.example.moviesappsofttek.core.states.UiState
+import com.example.moviesappsofttek.core.utils.FlowResult
 import com.example.moviesappsofttek.domain.usecase.accounts.AccountUseCase
 import com.example.moviesappsofttek.features.navigationCompose.AppScreens
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -65,16 +65,14 @@ class LoginViewModel @Inject constructor(
             _loginState.value = loginState.value.copy(isLoading = false)
             //Se valida el resultado de la petición
             when (loginResult.result) {
-                is ResourceEvent.Success -> {
+                is FlowResult.Success -> {
                     _eventFlow.emit(UiState.NavigateEvent(AppScreens.HomeScreen.route))
 
                 }
-
-                is ResourceEvent.Error -> {
+                is FlowResult.Error -> {
                     //En caso de que la petición no sea exitosa se muestra un mensaje de error
                     _eventFlow.emit(UiState.SnackbarEvent(loginResult.result.message ?: "Error!"))
                 }
-
                 else -> {
                     //Nothing
                 }

@@ -6,13 +6,18 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesappsofttek.R
+import com.example.moviesappsofttek.core.utils.GlobalConstants.api_key
 import com.example.moviesappsofttek.databinding.FragmentMoviesBinding
 import com.example.moviesappsofttek.domain.models.movies.MovieModel
-import com.example.moviesappsofttek.core.utils.GlobalConstants.api_key
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MoviesFragment : Fragment(), MoviesAdapter.OnRecipeClickListener {
@@ -23,6 +28,10 @@ class MoviesFragment : Fragment(), MoviesAdapter.OnRecipeClickListener {
     //Inicializamos variables
     private lateinit var moviesAdapter: MoviesAdapter
     private lateinit var movies: List<MovieModel>
+
+    private var isLoading = false
+    private var isLastPage = false
+    private var currentPage = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,8 +52,10 @@ class MoviesFragment : Fragment(), MoviesAdapter.OnRecipeClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         //Realizamos la llamada a la API para obtener la lista inicial de peliculas
-        viewModel.getMovieListPopularFromApi(api_key)
+        //Para la lista inicial es 1
+        viewModel.getMovieListPopularFromApi(api_key,1)
         //Bloque de codigo para el reciclerView
         binding.reciclerMovies.layoutManager = LinearLayoutManager(context)
         //Observamos la lista de peliculas
@@ -69,11 +80,36 @@ class MoviesFragment : Fragment(), MoviesAdapter.OnRecipeClickListener {
         }
         viewModel.errorMessage.observe(viewLifecycleOwner, errorObserver)
 
+
         //Funcion para buscar peliculas con el SearchView
         setupSearchView()
+        //Controlamos el scroll del reciclerView para paginacion
+        binding.reciclerMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (!isLoading && !isLastPage) {
+                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                    val visibleItemCount = layoutManager.childCount
+                    val totalItemCount = layoutManager.itemCount
+                    val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+                    if (visibleItemCount + firstVisibleItemPosition >= totalItemCount) {
+                        currentPage++
+                        loadMoreMovies()
+                    }
+                }
+            }
+        })
 
     }
 
+    //Funcion para cargar mas peliculas
+    private fun loadMoreMovies() {
+        isLoading = true
+        // Call the appropriate API function based on search state
+        if (binding.searchView.query.isNullOrEmpty()) {
+            viewModel.getMovieListPopularFromApi(api_key, currentPage)
+        }
+    }
     //Funcion para buscar peliculas con el SearchView
     private fun setupSearchView() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -92,14 +128,12 @@ class MoviesFragment : Fragment(), MoviesAdapter.OnRecipeClickListener {
             }
         })
         //Al pulsar la X del SearchView se muestra la lista inicial
-        binding.searchView.setOnCloseListener(object : SearchView.OnCloseListener {
-            override fun onClose(): Boolean {
-                //Al cerrar el SearchView se muestra la lista inicial
-                viewModel.moviesListModel.value = emptyList()
-                viewModel.getMovieListPopularFromApi(api_key)
-                return false
-            }
-        })
+        binding.searchView.setOnCloseListener {
+            // Al cerrar el SearchView se muestra la lista inicial
+            viewModel.moviesListModel.value = emptyList()
+            viewModel.getMovieListPopularFromApi(api_key,1)
+            false // Devuelve false como lo hacía el método onClose()
+        }
     }
 
     override fun onRecipeClick(movieModel: MovieModel, position: Int) {
@@ -115,7 +149,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.OnRecipeClickListener {
         super.onResume()
         //Al volver a la pantalla de peliculas se muestra la lista inicial
         viewModel.moviesListModel.value = emptyList()
-        viewModel.getMovieListPopularFromApi(api_key)
+        viewModel.getMovieListPopularFromApi(api_key,1)
     }
 
 }
