@@ -1,4 +1,4 @@
-package com.example.moviesappsofttek.data.remote.mappers
+package com.example.moviesappsofttek.data.mappers
 
 import com.example.moviesappsofttek.data.remote.models.movies.MovieListResponse
 import com.example.moviesappsofttek.domain.models.movies.MovieModel

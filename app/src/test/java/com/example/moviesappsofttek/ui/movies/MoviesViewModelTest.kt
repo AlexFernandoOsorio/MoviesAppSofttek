@@ -1,6 +1,8 @@
 package com.example.moviesappsofttek.ui.movies
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.moviesappsofttek.domain.usecase.movies.GetFavoriteMovieByIdFromDbUseCase
+import com.example.moviesappsofttek.domain.usecase.movies.GetFavoriteMoviesListFromDbUseCase
 import com.example.moviesappsofttek.domain.usecase.movies.GetMovieListFromApiUseCase
 import com.example.moviesappsofttek.domain.usecase.movies.GetMoviesByNameFromApiUseCase
 import com.example.moviesappsofttek.features.movies.MoviesViewModel
@@ -18,6 +20,8 @@ class MoviesViewModelTest{
     @RelaxedMockK
     private lateinit var getMoviesByNameFromApiUseCase: GetMoviesByNameFromApiUseCase
     @RelaxedMockK
+    private lateinit var getMoviesListFromDbUseCase: GetFavoriteMoviesListFromDbUseCase
+    @RelaxedMockK
     lateinit var moviesViewModel: MoviesViewModel
 
     @get:Rule
@@ -25,7 +29,7 @@ class MoviesViewModelTest{
     @Before
     fun onBefore(){
         MockKAnnotations.init(this)
-        moviesViewModel = MoviesViewModel(getMovieListFromApiUseCase, getMoviesByNameFromApiUseCase)
+        moviesViewModel = MoviesViewModel(getMovieListFromApiUseCase, getMoviesByNameFromApiUseCase,getMoviesListFromDbUseCase)
         Dispatchers.Unconfined
     }
 
@@ -33,7 +37,7 @@ class MoviesViewModelTest{
     @Test
     fun getGetMovieListFromApiUseCase() {
         // Given
-        moviesViewModel = MoviesViewModel(getMovieListFromApiUseCase, getMoviesByNameFromApiUseCase)
+        moviesViewModel = MoviesViewModel(getMovieListFromApiUseCase, getMoviesByNameFromApiUseCase,getMoviesListFromDbUseCase)
 
         // When
         val result = getMovieListFromApiUseCase.invoke("1234")
@@ -45,7 +49,7 @@ class MoviesViewModelTest{
     @Test
     fun getGetMoviesByNameFromApiUseCase() {
         // Given
-        moviesViewModel = MoviesViewModel(getMovieListFromApiUseCase, getMoviesByNameFromApiUseCase)
+        moviesViewModel = MoviesViewModel(getMovieListFromApiUseCase, getMoviesByNameFromApiUseCase,getMoviesListFromDbUseCase)
 
         // When
         val result = getMoviesByNameFromApiUseCase.invoke("1234", "Batman")

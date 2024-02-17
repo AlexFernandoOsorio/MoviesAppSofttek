@@ -1,11 +1,13 @@
 package com.example.moviesappsofttek.core.utils
 
+import com.example.moviesappsofttek.BuildConfig
+
 object GlobalConstants {
 
     //constantes para el apiservice
-    const val BASE_URL = "https://api.themoviedb.org/"
-    const val api_key = "066f9ce5063555c7d30a8de069ebd519"
-    const val poster_path = "https://image.tmdb.org/t/p/w500"
+    const val BASE_URL = BuildConfig.BASE_URL_MOVIE
+    const val api_key = BuildConfig.APPNAME_API_KEY
+    const val poster_path = BuildConfig.BASE_URL_IMAGE
 
     //constantes para mensajes de error
     const val noInternet = "No hay conexión a internet"

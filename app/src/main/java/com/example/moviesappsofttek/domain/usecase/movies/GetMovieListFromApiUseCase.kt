@@ -12,11 +12,13 @@ import javax.inject.Inject
 class GetMovieListFromApiUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
-    operator fun invoke(apiKey : String) = flow<UIEvent<List<MovieModel>>> {
+    // Caso de uso para obtener la lista de peliculas populares indexado por popularidad
+    operator fun invoke(apiKey: String, page : Int) = flow<UIEvent<List<MovieModel>>> {
         emit(UIEvent.Loading())
-        val movieList = movieRepository.getMovieListPopularFromRemote(apiKey)
+        val movieList = movieRepository.getMovieListPopularFromRemote(apiKey,page)
         emit(UIEvent.Success(movieList))
     }.catch {
+        // En caso de error se emite un evento de error
         emit(UIEvent.Error(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 

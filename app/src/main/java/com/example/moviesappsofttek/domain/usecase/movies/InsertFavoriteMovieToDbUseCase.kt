@@ -5,7 +5,8 @@ import com.example.moviesappsofttek.domain.repositories.MovieRepository
 import javax.inject.Inject
 
 class InsertFavoriteMovieToDbUseCase @Inject constructor(private val movieRepository: MovieRepository) {
-    suspend operator fun invoke(movieDetailModel: MovieDetailModel){
+    // Caso de uso para insertar una pelicula a la base de datos local
+    suspend operator fun invoke(movieDetailModel: MovieDetailModel) {
         movieRepository.insertMovieToLocal(movieDetailModel)
     }
 }

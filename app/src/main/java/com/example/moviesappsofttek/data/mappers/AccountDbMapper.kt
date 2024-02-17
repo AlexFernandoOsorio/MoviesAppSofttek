@@ -1,4 +1,4 @@
-package com.example.moviesappsofttek.data.remote.mappers
+package com.example.moviesappsofttek.data.mappers
 
 import com.example.moviesappsofttek.data.local.entities.AccountEntity
 import com.example.moviesappsofttek.domain.models.login.AccountModel

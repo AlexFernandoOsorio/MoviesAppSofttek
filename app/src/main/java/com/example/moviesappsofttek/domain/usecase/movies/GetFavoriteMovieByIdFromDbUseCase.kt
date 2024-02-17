@@ -4,7 +4,8 @@ import com.example.moviesappsofttek.domain.repositories.MovieRepository
 import javax.inject.Inject
 
 class GetFavoriteMovieByIdFromDbUseCase @Inject constructor(private val movieRepository: MovieRepository) {
-        suspend operator fun invoke(id : Int) = movieRepository.getMovieByIdFromLocal(id)?.let {
-            it
-        }
+    // Caso de uso para obtener una pelicula por id de la base de datos local
+    suspend operator fun invoke(id: Int) {
+        movieRepository.getMovieByIdFromLocal(id)
+    }
 }

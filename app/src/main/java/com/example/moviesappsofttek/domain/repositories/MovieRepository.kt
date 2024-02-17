@@ -6,7 +6,7 @@ import com.example.moviesappsofttek.domain.models.movies.MovieModel
 interface MovieRepository {
 
 
-    suspend fun getMovieListPopularFromRemote(apiKey: String):List<MovieModel>
+    suspend fun getMovieListPopularFromRemote(apiKey: String,page : Int):List<MovieModel>
 
     suspend fun getMovieByIdFromRemote(movieId: String, apiKey: String): MovieDetailModel
 

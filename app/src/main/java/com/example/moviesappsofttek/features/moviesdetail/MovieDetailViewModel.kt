@@ -10,7 +10,6 @@ import com.example.moviesappsofttek.domain.usecase.movies.GetMovieByIdFromApiUse
 import com.example.moviesappsofttek.domain.usecase.movies.InsertFavoriteMovieToDbUseCase
 import com.example.moviesappsofttek.core.utils.UIEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,7 +30,7 @@ class MovieDetailViewModel @Inject constructor(
 
     //Funcion para obtener la lista de peliculas por Id mediante llamada a la api
     fun getMovieByIdFromApi(movieId: String, apiKey: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             _movieModel.postValue(null)
             val movieList = getMovieByIdFromApiUseCase(movieId, apiKey)
             movieList.collect {

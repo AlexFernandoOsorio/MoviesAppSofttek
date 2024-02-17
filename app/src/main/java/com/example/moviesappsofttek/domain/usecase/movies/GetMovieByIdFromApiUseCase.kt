@@ -10,11 +10,13 @@ import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class GetMovieByIdFromApiUseCase @Inject constructor(private val movieRepository: MovieRepository) {
-    operator fun invoke(movieId : String , apiKey : String) = flow<UIEvent<MovieDetailModel>> {
+    // Caso de uso para obtener una pelicula por su id
+    operator fun invoke(movieId: String, apiKey: String) = flow<UIEvent<MovieDetailModel>> {
         emit(UIEvent.Loading())
-        val movieDetail = movieRepository.getMovieByIdFromRemote(movieId,apiKey)
+        val movieDetail = movieRepository.getMovieByIdFromRemote(movieId, apiKey)
         emit(UIEvent.Success(movieDetail))
     }.catch {
+        // En caso de error se emite un evento de error
         emit(UIEvent.Error(it.message.toString()))
     }.flowOn(Dispatchers.IO)
 
