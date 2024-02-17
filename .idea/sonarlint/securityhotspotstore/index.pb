@@ -147,3 +147,15 @@ Wapp/src/main/java/com/example/moviesappsofttek/domain/models/movies/MovieDetail
 iapp/src/main/java/com/example/moviesappsofttek/domain/usecase/movies/GetFavoriteMovieByIdFromDbUseCase.kt,0/2/0237a4188b353b62752b8822f4c5653bf4c2d481
 ñ
 fapp/src/main/java/com/example/moviesappsofttek/domain/usecase/movies/InsertFavoriteMovieToDbUseCase.kt,e/0/e01ae15d24f6d13dda2fde802671bf342bc6537a
+Å
+Qapp/src/main/java/com/example/moviesappsofttek/domain/models/movies/MovieModel.kt,a/d/adeb4297925da2c059f89619bc7c99742689916d
+w
+Gapp/src/main/java/com/example/moviesappsofttek/core/states/LoadState.kt,7/3/73ad8625c267f7da3563235ad3f0a45a6a02f5b7
+x
+Happ/src/main/java/com/example/moviesappsofttek/core/states/MovieState.kt,0/5/058db806deeefd38e6350f14e8cab9f3a88598e4
+u
+Eapp/src/main/java/com/example/moviesappsofttek/core/states/UiState.kt,3/b/3b50f28d09cd76efa710951fa7ab035e981a7724
+w
+Gapp/src/main/java/com/example/moviesappsofttek/core/utils/FlowResult.kt,f/0/f05e7d0bcfa5d7f209bbd589460fa3486b2a23d2
+t
+Dapp/src/main/java/com/example/moviesappsofttek/core/utils/UIEvent.kt,8/f/8f2681f4786b5a52d041f5eadb55008462009b4d
